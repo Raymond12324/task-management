@@ -1,5 +1,5 @@
-import { CreateTaskDto } from "./dto/create-task.dto";
-import { Task } from "./task.entity";
+import { CreateTaskDto } from "../dto/create-task.dto";
+import { Task } from "../task.entity";
 
 export interface ITaskRepository {
     getTasks(): Promise<Task[]>
