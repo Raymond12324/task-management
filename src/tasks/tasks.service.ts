@@ -22,4 +22,8 @@ export class TasksService {
     deleteTask(id: string): void {
         this.taskCustomRepository.deleteTask(id);
     }
+
+    updateTaskStatus(id: string, status: TaskStatus): Promise<Task> {
+        return this.taskCustomRepository.updateTaskStatus(id, status);
+    }
 }
