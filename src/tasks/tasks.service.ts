@@ -18,4 +18,8 @@ export class TasksService {
     async createTask(createTaskDto: CreateTaskDto): Promise<Task> {
         return this.taskCustomRepository.createTask(createTaskDto);
     }
+
+    deleteTask(id: string): void {
+        this.taskCustomRepository.deleteTask(id);
+    }
 }

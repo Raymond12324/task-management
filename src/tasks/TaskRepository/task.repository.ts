@@ -19,13 +19,14 @@ export class TaskCustomRepository implements ITaskRepository {
         const task = this.taskRepository.create({ ...createTaskDto, status: TaskStatus.OPEN });
         return await this.taskRepository.save(task);
     }
-    deleteTask(id: string): Promise<void> {
-        throw new Error('Method not implemented.');
+    async deleteTask(id: string): Promise<void> {
+        return await this.taskRepository.delete(id).then(() => { });
     }
-    updateTaskStatus(id: string, status: string): Promise<Task> {
-        throw new Error('Method not implemented.');
+    async updateTaskStatus(id: string, status: TaskStatus): Promise<Task> {
+        const task = await this.getTaskById(id);
+        task.status = status;
+        return await this.taskRepository.save(task);
     }
-
     getTasks(): Promise<Task[]> {
         return this.taskRepository.find();
     }
