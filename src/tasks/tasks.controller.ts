@@ -16,24 +16,16 @@ export class TasksController {
 
 
     @Get()
-    async getTask(): Promise<Task[]> {
-        // if(Object.keys(filterDto).length) {
-        //    return this.tasksService.getTasksWithFilters(filterDto);
-        // }else{
-        return await this.tasksService.getAllTasks();
-        //}
+    async getTask(@Query() getTasksFilterDto: GetTasksFilterDto): Promise<Task[]> {
+        console.log(getTasksFilterDto);
+        return await this.tasksService.getTask(getTasksFilterDto);
+
     }
 
-    // @Get('/:id')
-    // getTaskById(@Param('id') id: string) Promise<Task> {
-    //     const Myid = id;
-    //     return this.tasksService.getTasksById(id);
-    // }
-
-    // @Get('/:id')
-    // getTaskById(@Param('id') id: string): Promise<Task> {
-    //     return this.tasksService.getTaskById(id);
-    // }
+    @Get('/:id')
+    getTaskById(@Param('id') id: string): Promise<Task> {
+        return this.tasksService.getTaskById(id);
+    }
 
     @Post()
     createTask(@Body() createTaskDto: CreateTaskDto): Promise<Task> {
