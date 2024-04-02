@@ -11,10 +11,9 @@ import { Task } from './task.entity';
 @Controller('tasks')
 export class TasksController {
     constructor(private tasksService: TasksService) { }
-    
+
     @Get()
     async getTask(@Query() getTasksFilterDto: GetTasksFilterDto): Promise<Task[]> {
-        console.log(getTasksFilterDto);
         return await this.tasksService.getTask(getTasksFilterDto);
     }
 
