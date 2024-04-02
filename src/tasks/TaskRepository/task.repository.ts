@@ -40,7 +40,6 @@ export class TaskCustomRepository extends Repository<Task> implements ITaskRepos
         const { status, search } = getTasksFilterDto;
 
         const query = this.createQueryBuilder('task');
-        console.log(status);
 
         if (status) {
             query.andWhere('task.status = :status', { status });
