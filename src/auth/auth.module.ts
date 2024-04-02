@@ -6,6 +6,7 @@ import { UserRepostory } from './user.repository';
 import { User } from './user.entity';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
+import { JwtStrategy } from './jwt.strategy';
 
 @Module({
   imports: [
@@ -18,7 +19,8 @@ import { PassportModule } from '@nestjs/passport';
       },
     }),
 ],
-  providers: [AuthService, UserRepostory],
-  controllers: [AuthController]
+  providers: [AuthService, UserRepostory,JwtStrategy],
+  controllers: [AuthController],
+  exports: [JwtStrategy, PassportModule],
 })
 export class AuthModule {}
