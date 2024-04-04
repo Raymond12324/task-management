@@ -6,28 +6,29 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Task } from './task.entity';
 import { Repository } from 'typeorm';
 import { TaskCustomRepository } from './TaskRepository/task.repository';
+import { User } from 'src/auth/user.entity';
 @Injectable()
 export class TasksService {
 
     constructor(private taskCustomRepository: TaskCustomRepository) { }
 
-    getTask(getTasksFilterDto: GetTasksFilterDto): Promise<Task[]> {
-        return this.taskCustomRepository.getTasks(getTasksFilterDto);
+    getTask(getTasksFilterDto: GetTasksFilterDto, user: User): Promise<Task[]> {
+        return this.taskCustomRepository.getTasks(getTasksFilterDto, user);
     }
 
-    getTaskById(id: string): Promise<Task> {
-        return this.taskCustomRepository.getTaskById(id);
+    getTaskById(id: string, user: User): Promise<Task> {
+        return this.taskCustomRepository.getTaskById(id, user);
     }
 
-    async createTask(createTaskDto: CreateTaskDto): Promise<Task> {
-        return this.taskCustomRepository.createTask(createTaskDto);
+    async createTask(createTaskDto: CreateTaskDto, user: User): Promise<Task> {
+        return this.taskCustomRepository.createTask(createTaskDto, user);
     }
 
-    deleteTask(id: string): void {
-        this.taskCustomRepository.deleteTask(id);
+    deleteTask(id: string, user: User): void {
+        this.taskCustomRepository.deleteTask(id, user);
     }
 
-    updateTaskStatus(id: string, status: TaskStatus): Promise<Task> {
-        return this.taskCustomRepository.updateTaskStatus(id, status);
+    updateTaskStatus(id: string, status: TaskStatus, user: User): Promise<Task> {
+        return this.taskCustomRepository.updateTaskStatus(id, status, user);
     }
 }
